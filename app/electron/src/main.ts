@@ -366,6 +366,12 @@ ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
   win?.setAlwaysOnTop(alwaysOnTop);
 });
 
+ipcMain.on("set-progress-bar", (event, ops) => {
+  // 设置主窗口的进度条
+  console.log("set-progress-bar", ops);
+  win?.setProgressBar(ops.time, { mode: ops.type });
+});
+
 ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
   setFullscreenBreakHandler(args, {
     win,

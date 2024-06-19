@@ -4,6 +4,12 @@ import { TO_MAIN, FROM_MAIN } from "@pomatez/shareables";
 // https://github.com/electron/electron/issues/9920#issuecomment-575839738
 
 contextBridge.exposeInMainWorld("electron", {
+  setProgressBar: (
+    time: number,
+    type: "none" | "normal" | "indeterminate" | "error" | "paused"
+  ) => {
+    ipcRenderer.send("set-progress-bar", { time, type });
+  },
   send: (channel: string, ...args: any[]) => {
     if (TO_MAIN.includes(channel)) {
       ipcRenderer.send(channel, ...args);
